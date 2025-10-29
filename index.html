@@ -4,17 +4,29 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Fotogram</title>
-    <script src="script.js"></script>
-    <script src="style.css"></script>
+
+    <link rel="stylesheet" href="style.css" />
   </head>
   <body>
     <header>
-      <img src="./logo/Fotogram_Logo.svg" alt="" srcset="" />
-      <p>Fotogram</p>
+      <img
+        class="fotogram-logo"
+        src="./logo/Fotogram_Logo.svg"
+        alt="Logo of Fotogram"
+        srcset=""
+      />
     </header>
-    <h1>Welcome to Fotogram</h1>
-    <p>Your favorite place to share photos!</p>
+    <main>
+      <section class="welcome-section">
+        <h1>Welcome to Fotogram</h1>
+
+        <button id="themeToggle" class="button-dark-theme">Dark Theme</button>
+      </section>
+      <section class="img-section"></section>
+      <p>Your favorite place to share photos!</p>
+    </main>
   </body>
 
   <footer>&copy; 2025 Fotogram. All rights reserved.</footer>
+  <script src="script.js"></script>
 </html>

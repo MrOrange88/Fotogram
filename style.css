@@ -1,0 +1,50 @@
+@font-face {
+  font-family: "Orbitron";
+  src: url("./Orbitron/Orbitron-VariableFont_wght.ttf") format("woff2"),
+    url("./Orbitron/Orbitron-VariableFont_wght.ttf") format("woff");
+  font-weight: normal;
+  font-style: normal;
+
+}
+body {
+  font-family: 'Orbitron', sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  background-color: #ffffff;
+  color: #000000;
+}
+body.dark-mode {
+    background-color: #121212;
+    color: #ffffff;
+}
+header {
+  background-color: #121212;
+  padding: 20px;
+  font-size: 24px;
+  font-weight: bold;
+  border-bottom: 1px solid #e7e7e7;
+}
+.fotogram-logo {
+  width: 500px;
+  height: auto;
+}
+.welcome-section {
+    display: flex;
+    justify-content: space-between;
+}
+body.dark-mode #themeToggle {
+    background-color:#27db0f;
+    color: #ffffff;
+}
+.button-dark-theme {
+  background-color: #121212;
+  color: #ffffff;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-size: 16px;
+  margin: 20px;
+  border-radius: 8px;
+}
+
