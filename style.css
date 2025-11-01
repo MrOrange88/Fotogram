@@ -46,6 +46,24 @@ h1 {
   font-size: 36px;
   margin-left: 10px;
 }
+.home-button {
+  background-color: #121212;
+  color: #ffffff;
+  font-family: 'Orbitron', sans-serif;
+  border: none; 
+  cursor: pointer;
+  font-size: 16px;
+  margin: 24px;
+  border-radius: 8px;
+}
+.home-button:hover {
+  background-color: #27db0f;
+}
+.rights-header-buttons {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
 body.dark-mode #themeToggle {
     background-color:#27db0f;
     color: #ffffff;
@@ -53,12 +71,13 @@ body.dark-mode #themeToggle {
 .button-dark-theme {
   background-color: #121212;
   color: #ffffff;
-  border: none;
-  padding: 10px 20px;
+  font-family: 'Orbitron', sans-serif;
+  border: none; 
   cursor: pointer;
   font-size: 16px;
-  margin: 20px;
+  margin: 24px;
   border-radius: 8px;
+  
 }
 .img-section img {
   width: 300px;
@@ -83,12 +102,46 @@ body.dark-mode #themeToggle {
   margin-bottom: 10px;
   background-color: #ffffff;
 }
+
+.close-button {
+  background-color: #ff4d4d;
+  font-family: 'Orbitron', sans-serif;
+  height: 32px;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+  font-size: 12px;
+  border-radius: 4px;
+}
 .dialog-footer {
   display: flex;
   justify-content: space-between;
   font-size: 12px;
   margin-top: 10px;
   background-color: #ffffff;
+}
+.next-button {
+  background-color: #121212;
+  font-family: 'Orbitron', sans-serif;
+  height: 32px;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+  font-size: 12px;
+  border-radius: 4px;
+}
+.back-button {
+  background-color: #121212;
+  font-family: 'Orbitron', sans-serif;
+  height: 32px;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+  font-size: 12px;
+  border-radius: 4px;
 }
 .dialog-footer p {
   margin: 0;  
@@ -124,12 +177,30 @@ footer p {
 .follow-me-link:hover {
   font-size: 18px;
 }
+.footer-rights {
+  color: white;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-size: 12px;
+}
+.footer-rights a {
+  color: white;
+  text-decoration: none;
+}
+.footer-rights a:hover {
+  font-size: 14px;
+}
 .profil-img {
+  object-fit: cover;
   width: 84px;
   height: 84px
 }
 .github-logo {
   width: 40px;
   height: 40px;
+}
+.link-pixa {
+  margin-left: 10px;
 }
 
