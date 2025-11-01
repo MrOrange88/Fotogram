@@ -7,7 +7,7 @@
 
     <link rel="stylesheet" href="style.css" />
   </head>
-  <body>
+  <body onload="render()">
     <header>
       <img
         class="fotogram-logo"
@@ -17,16 +17,42 @@
       />
     </header>
     <main>
-      <section class="welcome-section">
-        <h1>Welcome to Fotogram</h1>
-
-        <button id="themeToggle" class="button-dark-theme">Dark Theme</button>
-      </section>
-      <section class="img-section"></section>
-      <p>Your favorite place to share photos!</p>
+      <div>
+        <section class="welcome-section">
+          <h1>Welcome to Fotogram</h1>
+          <button id="themeToggle" class="button-dark-theme">Dark Theme</button>
+        </section>
+        <section id="content" class="img-section"></section>
+      </div>
+      <dialog id="imageDialog">
+        <form method="dialog">
+          <h3>Image Preview</h3>
+          <img id="dialogImage" src="" alt="Preview Image" />
+          <p id="dialogDescription"></p>
+          <button id="close-button" class="close-button">Close</button>
+        </form>
+      </dialog>
+      <div>
+        <p>Your favorite place to share photos!</p>
+      </div>
     </main>
   </body>
 
-  <footer>&copy; 2025 Fotogram. All rights reserved.</footer>
+  <footer>
+    <div class="created-by-container">
+      <h2>Created by</h2>
+      <img class="profil-img" src="./logo/Profil 1 neu.png" alt="" srcset="" />
+      <p>Alexander V.</p>
+    </div>
+    <a class="follow-me-link" href="https://github.com/MrOrange88">
+      <p>Follow me on GitHub!</p>
+      <img
+        class="github-logo"
+        src="./logo/github-mark-white.png"
+        alt="GitHub logo"
+      />
+    </a>
+    &copy; 2025 Fotogram. All rights reserved.
+  </footer>
   <script src="script.js"></script>
 </html>
