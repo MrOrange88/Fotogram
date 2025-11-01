@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Fotogram</title>
-
+    <link rel="icon" href="./favicon/favicon.png" sizes="48x48" />
     <link rel="stylesheet" href="style.css" />
   </head>
   <body onload="render()">
@@ -33,6 +33,9 @@
       <dialog id="imageDialog"></dialog>
       <div>
         <p>Your favorite place to share photos!</p>
+        <input type="file" name="file" multiple />
+        <button id="upload-button">Upload</button>
+        <button id="remove-upload-button">Remove uploaded Images</button>
       </div>
     </main>
   </body>

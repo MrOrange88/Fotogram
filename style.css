@@ -1,19 +1,20 @@
 @font-face {
   font-family: "Orbitron";
   src: url("./Orbitron/Orbitron-VariableFont_wght.ttf") format("woff2"),
-      url("./Orbitron/Orbitron-VariableFont_wght.ttf") format("woff");
+    url("./Orbitron/Orbitron-VariableFont_wght.ttf") format("woff");
   font-weight: normal;
   font-style: normal;
-
 }
+
 body {
-  font-family: 'Orbitron', sans-serif;
+  font-family: "Orbitron", sans-serif;
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   background-color: #ffffff;
   color: #000000;
 }
+
 body.dark-mode {
   background-color: #121212;
   color: #ffffff;
@@ -25,7 +26,7 @@ main {
   padding-bottom: 64px;
 }
 main p {
-  margin-left:10px
+  margin-left: 10px;
 }
 header {
   background-color: #121212;
@@ -49,8 +50,8 @@ h1 {
 .home-button {
   background-color: #121212;
   color: #ffffff;
-  font-family: 'Orbitron', sans-serif;
-  border: none; 
+  font-family: "Orbitron", sans-serif;
+  border: none;
   cursor: pointer;
   font-size: 16px;
   margin: 24px;
@@ -64,27 +65,14 @@ h1 {
   justify-content: space-between;
   align-items: center;
 }
-body.dark-mode #themeToggle {
-    background-color:#27db0f;
-    color: #ffffff;
-}
-.button-dark-theme {
-  background-color: #121212;
-  color: #ffffff;
-  font-family: 'Orbitron', sans-serif;
-  border: none; 
-  cursor: pointer;
-  font-size: 16px;
-  margin: 24px;
-  border-radius: 8px;
-  
-}
+
 .img-section img {
   width: 300px;
   height: 200px;
   margin: 10px;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
 }
 .img-section img:hover {
   transform: scale(1.05);
@@ -94,6 +82,9 @@ body.dark-mode #themeToggle {
   width: 650px;
   height: 400px;
   object-fit: cover;
+}
+dialog::backdrop {
+  background-color: rgba(0, 0, 0, 0.7);
 }
 .dialog-header {
   display: flex;
@@ -105,7 +96,7 @@ body.dark-mode #themeToggle {
 
 .close-button {
   background-color: #ff4d4d;
-  font-family: 'Orbitron', sans-serif;
+  font-family: "Orbitron", sans-serif;
   height: 32px;
   color: white;
   border: none;
@@ -123,7 +114,7 @@ body.dark-mode #themeToggle {
 }
 .next-button {
   background-color: #121212;
-  font-family: 'Orbitron', sans-serif;
+  font-family: "Orbitron", sans-serif;
   height: 32px;
   color: white;
   border: none;
@@ -134,7 +125,7 @@ body.dark-mode #themeToggle {
 }
 .back-button {
   background-color: #121212;
-  font-family: 'Orbitron', sans-serif;
+  font-family: "Orbitron", sans-serif;
   height: 32px;
   color: white;
   border: none;
@@ -144,9 +135,9 @@ body.dark-mode #themeToggle {
   border-radius: 4px;
 }
 .dialog-footer p {
-  margin: 0;  
-  color: #000000
-  }
+  margin: 0;
+  color: #000000;
+}
 
 footer {
   background-color: #121212;
@@ -194,7 +185,7 @@ footer p {
 .profil-img {
   object-fit: cover;
   width: 84px;
-  height: 84px
+  height: 84px;
 }
 .github-logo {
   width: 40px;
@@ -204,3 +195,29 @@ footer p {
   margin-left: 10px;
 }
 
+
+/** 
+  * Beispiel für Verschachteltes CSS (mit dem Theme Button)
+  * https://developer.mozilla.org/de/docs/Web/CSS/CSS_nesting/Nesting_at-rules
+  * https://developer.mozilla.org/de/docs/Web/CSS/CSS_nesting/Nesting_and_specificity
+  * https://developer.mozilla.org/de/docs/Web/CSS/CSS_nesting/Using_CSS_nesting
+  */
+body {
+  #themeToggle {
+    background-color: #121212;
+    color: #ffffff;
+    font-family: "Orbitron", sans-serif;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    margin: 24px;
+    border-radius: 8px;
+  }
+
+  &.dark-mode {
+    #themeToggle {
+      background-color: #27db0f;
+      color: #ffffff;
+    }
+  }
+}  
