@@ -55,6 +55,13 @@ header {
   font-weight: bold;
   border-bottom: 1px solid #e7e7e7;
 }
+.header-container {
+  max-width: 1500px;
+  margin: 0 auto;
+  display: flex;
+  padding: 20px;
+  align-items: center;
+}
 .fotogram-logo {
   width: 450px;
   height: auto;
@@ -364,12 +371,17 @@ body.dark-mode {
     display: flex;
   }
 }
-@media (max-width: 440px) {
-  .created-by-container p {
-    display: none;
-  }
+@media (max-width: 490px) {
   h1 {
     font-size: 28px;
+  }
+}
+@media (max-width: 440px) {
+  h1 {
+    font-size: 24px;
+  }
+  .created-by-container p {
+    display: none;
   }
   .fotogram-logo {
     width: 250px;
@@ -391,6 +403,9 @@ body.dark-mode {
   }
 }
 @media (max-width: 370px) {
+  h1 {
+    font-size: 20px;
+  }
   .img-section img {
     width: 250px;
     height: 150px;

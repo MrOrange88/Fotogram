@@ -1,3 +1,13 @@
+document.addEventListener("DOMContentLoaded", () => {
+  applySavedTheme();
+  setupThemeToggleButtonClickEvent();
+  setupOutsideDialogClickEvent();
+  setupDialogKeyboardNavigationEvent();
+  setupUploadButtonClickEvent();
+  setupRemoveUploadButtonClickEvent();
+  render();
+});
+
 const originalPictures = [
   "./Img/avenue.jpg",
   "./Img/blossoms.jpg",
@@ -52,9 +62,6 @@ function loadImagesFromStorage() {
   return [];
 }
 
-/**
- * @param {File} file
- */
 function saveImageInLocalStorage(file) {
   const data = loadImagesFromStorage();
   data.push(file);
@@ -64,95 +71,62 @@ function saveImageInLocalStorage(file) {
 function clearImagesInLocalStorage() {
   window.localStorage.removeItem("files");
 }
-// code zu lang
-document.addEventListener("DOMContentLoaded", () => {
-  applySavedTheme();
 
-  const themeButton = document.getElementById("themeToggle");
-  themeButton.addEventListener("click", () => {
-    toggleSavedTheme();
-    applySavedTheme();
-  });
-
-  const dialogRef = document.getElementById("imageDialog");
-  if (dialogRef) {
-    dialogRef.addEventListener("click", (event) => {
-      const rect = dialogRef.getBoundingClientRect();
-      const isInDialogContent =
-        event.clientX >= rect.left &&
-        event.clientX <= rect.right &&
-        event.clientY >= rect.top &&
-        event.clientY <= rect.bottom;
-      if (!isInDialogContent) {
-        dialogRef.close();
-      }
-    });
-  }
-
-  const uploadButton = document.getElementById("upload-button");
-  uploadButton.addEventListener("click", () => {
-    handleUpload();
-  });
-
-  const removeUploadButton = document.getElementById("remove-upload-button");
-  removeUploadButton.addEventListener("click", () => {
-    clearImagesInLocalStorage();
-    render();
-  });
-});
-// code zu lang
-function render() {
+function updateAllPictures() {
   allPictures = originalPictures.slice();
 
   const storedPictures = loadImagesFromStorage();
   storedPictures.forEach((file) => allPictures.push(file));
+}
 
+function render() {
+  updateAllPictures();
+  renderContentImages();
+  setupContentImagesEvents();
+}
+
+function renderContentImages() {
   let contentRef = document.getElementById("content");
-
   contentRef.innerHTML = "";
   for (let index = 0; index < allPictures.length; index++) {
     contentRef.innerHTML += getNoteTemplate(index);
   }
+}
+
+function setupContentImagesEvents() {
   document.querySelectorAll('img[aria-haspopup="dialog"]').forEach((img) => {
-    img.addEventListener("click", (event) => {
-      const index = Array.from(
-        document.querySelectorAll('img[aria-haspopup="dialog"]')
-      ).indexOf(event.target);
-      openDialog(index);
-    });
-    img.addEventListener("keydown", (event) => {
-      if (event.key === "Enter" || event.key === " ") {
-        event.preventDefault();
-        const index = Array.from(
-          document.querySelectorAll('img[aria-haspopup="dialog"]')
-        ).indexOf(event.target);
-        openDialog(index);
-      }
-    });
+    setupContentImageClickEvent(img);
+    setupContentImageKeydownEvent(img);
   });
+}
+
+function setupContentImageClickEvent(img) {
+  img.addEventListener("click", (event) => {
+    imageClickedEventHandler(event);
+  });
+}
+
+function setupContentImageKeydownEvent(img) {
+  img.addEventListener("keydown", (event) => {
+    if (event.key === "Enter" || event.key === " ") {
+      event.preventDefault();
+      imageClickedEventHandler(event);
+    }
+  });
+}
+
+function imageClickedEventHandler(event) {
+  const index = Array.from(
+    document.querySelectorAll('img[aria-haspopup="dialog"]')
+  ).indexOf(event.target);
+  openDialog(index);
 }
 
 function openDialog(index) {
   let dialogRef = document.getElementById("imageDialog");
+  dialogRef.dataset.index = index;
   dialogRef.innerHTML = getDialogTemplate(index);
   dialogRef.showModal();
-
-  addDialogKeyboardNavigation(index);
-}
-
-function addDialogKeyboardNavigation(index) {
-  function handleKeyDown(event) {
-    if (event.key === "ArrowRight") {
-      imgNext(index);
-    } else if (event.key === "ArrowLeft") {
-      imgBack(index);
-    } else if (event.key === "Escape") {
-      closeDialog();
-    }
-  }
-  document.removeEventListener("keydown", window._dialogKeyListener);
-  window._dialogKeyListener = handleKeyDown;
-  document.addEventListener("keydown", handleKeyDown);
 }
 
 function closeDialog() {
@@ -161,48 +135,62 @@ function closeDialog() {
 }
 
 function imgName(index) {
+  const picture = allPictures[index];
+  if (picture.startsWith("data")) return "Uploaded Image";
   return (
-    allPictures[index]
+    picture
       .slice(6)
       .charAt(0)
       .toUpperCase()
       .replace(/-/g, " ")
       .replace(".jpg", "") +
-    allPictures[index].slice(7).replace(/-/g, " ").replace(".jpg", "")
+    picture.slice(7).replace(/-/g, " ").replace(".jpg", "")
   );
 }
+
 function getImgNumber(index) {
   return index + 1;
 }
-function imgNext(index) {
-  index = (index + 1) % allPictures.length;
-  openDialog(index);
+
+function getIndexFromDialog() {
+  try {
+    return parseInt(document.getElementById("imageDialog").dataset.index);
+  } catch (e) {
+    console.log("fehler beim auslesen des index aus dem dialog data attribute");
+  }
+  return 0;
 }
 
-function imgBack(index) {
-  index = (index - 1 + allPictures.length) % allPictures.length;
-  openDialog(index);
+function imgNext() {
+  const index = getIndexFromDialog();
+  let nextIndex = index + 1;
+  if (nextIndex >= allPictures.length) {
+    nextIndex = 0;
+  }
+  openDialog(nextIndex);
+}
+
+function imgBack() {
+  const index = getIndexFromDialog();
+  let previousIndex = index - 1;
+  if (previousIndex < 0) {
+    previousIndex = allPictures.length - 1;
+  }
+  openDialog(previousIndex);
 }
 
 function handleUpload() {
   const fileInput = document.querySelector("input[name=file]");
   if (fileInput && fileInput.files && fileInput.files.length > 0) {
     for (let index = 0; index < fileInput.files.length; index++) {
-      uploadFile(fileInput.files[index], index);
+      uploadFile(fileInput.files[index]);
     }
 
     fileInput.value = "";
   }
 }
 
-/**
- * @param {File} file
- * @param {number} index
- */
-
-function uploadFile(file, index) {
-  console.log("upload file:", file);
-
+function uploadFile(file) {
   const reader = new FileReader();
   reader.readAsDataURL(file);
   reader.onload = () => {
@@ -213,4 +201,62 @@ function uploadFile(file, index) {
   reader.onerror = (err) => {
     console.error("Beim lesen der Datei ist was schiefgegangen T_T", err);
   };
+}
+
+function setupThemeToggleButtonClickEvent() {
+  const themeButton = document.getElementById("themeToggle");
+  themeButton.addEventListener("click", () => {
+    toggleSavedTheme();
+    applySavedTheme();
+  });
+}
+
+function isClickEventInsideDialog(dialog, event) {
+  const rect = dialog.getBoundingClientRect();
+  return (
+    event.clientX >= rect.left &&
+    event.clientX <= rect.right &&
+    event.clientY >= rect.top &&
+    event.clientY <= rect.bottom
+  );
+}
+
+function setupOutsideDialogClickEvent() {
+  const dialogRef = document.getElementById("imageDialog");
+  if (dialogRef) {
+    dialogRef.addEventListener("click", (event) => {
+      if (!isClickEventInsideDialog(dialogRef, event)) {
+        dialogRef.close();
+      }
+    });
+  }
+}
+
+function setupDialogKeyboardNavigationEvent() {
+  document.addEventListener("keydown", (event) => {
+    const dialogRef = document.getElementById("imageDialog");
+    if (!dialogRef.open) return;
+    if (event.key === "ArrowRight") {
+      imgNext();
+    } else if (event.key === "ArrowLeft") {
+      imgBack();
+    } else if (event.key === "Escape") {
+      closeDialog();
+    }
+  });
+}
+
+function setupUploadButtonClickEvent() {
+  const uploadButton = document.getElementById("upload-button");
+  uploadButton.addEventListener("click", (event) => {
+    handleUpload();
+  });
+}
+
+function setupRemoveUploadButtonClickEvent() {
+  const removeUploadButton = document.getElementById("remove-upload-button");
+  removeUploadButton.addEventListener("click", () => {
+    clearImagesInLocalStorage();
+    render();
+  });
 }
