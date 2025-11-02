@@ -426,4 +426,10 @@ body.dark-mode {
     width: 250px;
     height: 150px;
   }
+  .follow-me-link {
+    font-size: 12px;
+  }
+  .footer-rights {
+    font-size: 12px;
+  }
 }
