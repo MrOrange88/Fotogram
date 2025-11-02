@@ -33,9 +33,14 @@
       <dialog id="imageDialog"></dialog>
       <div>
         <p>Your favorite place to share photos!</p>
-        <input type="file" name="file" multiple />
-        <button id="upload-button">Upload</button>
-        <button id="remove-upload-button">Remove uploaded Images</button>
+      </div>
+      <div class="upload-section">
+        <label for="file-upload" class="file-upload"> </label>
+        <input id="fileUpload" type="file" name="file" multiple />
+        <button class="upload-remove-button" id="upload-button">Upload</button>
+        <button class="upload-remove-button" id="remove-upload-button">
+          Remove uploaded Images
+        </button>
       </div>
     </main>
   </body>

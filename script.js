@@ -45,7 +45,6 @@ function loadImagesFromStorage() {
         return data;
       }
     } catch (e) {
-      // hier ignorieren wir den fehler einfach :)
       console.error("dieser fehler wurde ignoriert °,..,°", e);
     }
   }
@@ -75,10 +74,10 @@ document.addEventListener("DOMContentLoaded", () => {
     applySavedTheme();
   });
 
+  // Close dialog if clicked outside content area
   const dialogRef = document.getElementById("imageDialog");
   if (dialogRef) {
     dialogRef.addEventListener("click", (event) => {
-      // Close dialog if clicked outside content area
       const rect = dialogRef.getBoundingClientRect();
       const isInDialogContent =
         event.clientX >= rect.left &&
@@ -102,17 +101,17 @@ document.addEventListener("DOMContentLoaded", () => {
     render();
   });
 });
-
+// reset all pictures to original pictures
+// add images from storage
+// cleanup contentRef Zeile 117
 function render() {
-  // reset all pictures to original pictures
   allPictures = originalPictures.slice();
 
-  // add images from storage
   const storedPictures = loadImagesFromStorage();
   storedPictures.forEach((file) => allPictures.push(file));
 
   let contentRef = document.getElementById("content");
-  // cleanup contentRef
+
   contentRef.innerHTML = "";
   for (let index = 0; index < allPictures.length; index++) {
     contentRef.innerHTML += getNoteTemplate(index);
@@ -165,25 +164,51 @@ function openDialog(index) {
   let dialogRef = document.getElementById("imageDialog");
   dialogRef.innerHTML = getDialogTemplate(index);
   dialogRef.showModal();
+
+  addDialogKeyboardNavigation(index);
+}
+
+function addDialogKeyboardNavigation(index) {
+  function handleKeyDown(event) {
+    if (event.key === "ArrowRight") {
+      imgNext(index);
+    } else if (event.key === "ArrowLeft") {
+      imgBack(index);
+    } else if (event.key === "Escape") {
+      closeDialog();
+    }
+  }
+  document.removeEventListener("keydown", window._dialogKeyListener);
+  window._dialogKeyListener = handleKeyDown;
+  document.addEventListener("keydown", handleKeyDown);
 }
 
 function closeDialog() {
   let dialogRef = document.getElementById("imageDialog");
   dialogRef.close();
 }
-
+// ./Img/science-Fiction.jpg Zeile 184
+// [".", "Img", "science-Fiction.jpg"] Zeeile 185
+// science-Fiction.jpg Zeile 186
+// ["science-Fiction", "jpg"] Zeile 187
+// science-Fiction Zeile 188
+// science Fiction // Zeile 189
+// entfernt auch Unterstriche Zeile 190
+// split Zeile 192
+// jedes wort groß Zeile 193
+// und wieder zusammen Zeile 194
 function imgName2(index) {
-  const picturePath = allPictures[index]; // ./Img/science-Fiction.jpg
-  const splittedPicturePath = picturePath.split("/"); // [".", "Img", "science-Fiction.jpg"]
-  const fileName = splittedPicturePath[splittedPicturePath.length - 1]; // science-Fiction.jpg
-  const splittedFileName = fileName.split("."); // ["science-Fiction", "jpg"]
-  let name = splittedFileName[0]; // science-Fiction
-  name = name.replace(/-/g, " "); // science Fiction
-  name = name.replace(/_/g, " "); // entfernt auch Unterstriche
+  const picturePath = allPictures[index];
+  const splittedPicturePath = picturePath.split("/");
+  const fileName = splittedPicturePath[splittedPicturePath.length - 1];
+  const splittedFileName = fileName.split(".");
+  let name = splittedFileName[0];
+  name = name.replace(/-/g, " ");
+  name = name.replace(/_/g, " ");
   return name
-    .split(" ") // split
-    .map((v) => v[0].toUpperCase() + v.slice(1)) // jedes wort
-    .join(" "); // und wieder zusammen
+    .split(" ")
+    .map((v) => v[0].toUpperCase() + v.slice(1))
+    .join(" ");
 }
 
 function imgName(index) {
@@ -204,11 +229,12 @@ function imgNext(index) {
   index = (index + 1) % allPictures.length;
   openDialog(index);
 }
+
 function imgBack(index) {
   index = (index - 1 + allPictures.length) % allPictures.length;
   openDialog(index);
 }
-
+// Clear the file input after upload zeile 220
 function handleUpload() {
   const fileInput = document.querySelector("input[name=file]");
   if (fileInput && fileInput.files && fileInput.files.length > 0) {
@@ -216,7 +242,6 @@ function handleUpload() {
       uploadFile(fileInput.files[index], index);
     }
 
-    // Clear the file input after upload
     fileInput.value = "";
   }
 }
@@ -225,13 +250,14 @@ function handleUpload() {
  * @param {File} file
  * @param {number} index
  */
+
+// hier wollen wir den inhalt des bildes auslesen
+// um diesen im local storage zu speichern
+// das funktioniert mit dem FileReader
+// https://developer.mozilla.org/en-US/docs/Web/API/FileReader
 function uploadFile(file, index) {
   console.log("upload file:", file);
 
-  // hier wollen wir den inhalt des bildes auslesen
-  // um diesen im local storage zu speichern
-  // das funktioniert mit dem FileReader
-  // https://developer.mozilla.org/en-US/docs/Web/API/FileReader
   const reader = new FileReader();
   reader.readAsDataURL(file);
   reader.onload = () => {

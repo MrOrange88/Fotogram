@@ -1,3 +1,6 @@
+/* --------------------------------------------- */
+/*                 FONTS                         */
+/* --------------------------------------------- */
 @font-face {
   font-family: "Orbitron";
   src: url("./Orbitron/Orbitron-VariableFont_wght.ttf") format("woff2"),
@@ -5,31 +8,48 @@
   font-weight: normal;
   font-style: normal;
 }
-
+/* --------------------------------------------- */
+/*              CUSTOM PROPERTIES               */
+/* --------------------------------------------- */
+:root {
+  --primary-color: #121212;
+  --secondary-color: #ffffff;
+  --accent-color: #27db0f;
+  --text-color: #000000;
+  --background-color: #ffffff;
+}
+/* --------------------------------------------- */
+/*                   GLOBAL                      */
+/* --------------------------------------------- */
 body {
   font-family: "Orbitron", sans-serif;
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  background-color: #ffffff;
+  background-color: var(--background-color);
   color: #000000;
 }
-
-body.dark-mode {
-  background-color: #121212;
-  color: #ffffff;
+h1 {
+  font-size: 36px;
+  margin-left: 10px;
 }
+
 main {
   max-width: 1500px;
   margin: 0 auto;
   padding: 20px;
   padding-bottom: 64px;
+  margin-bottom: 24px;
+  min-height: 100vh;
 }
 main p {
   margin-left: 10px;
 }
+/* --------------------------------------------- */
+/*                   HEADER                      */
+/* --------------------------------------------- */
 header {
-  background-color: #121212;
+  background-color: var(--primary-color);
   padding: 20px;
   font-size: 16px;
   font-weight: bold;
@@ -39,33 +59,42 @@ header {
   width: 450px;
   height: auto;
 }
+/* --------------------------------------------- */
+/*                    MAIN                       */
+/* --------------------------------------------- */
 .welcome-section {
+  max-width: 1500px;
   display: flex;
   justify-content: space-between;
-}
-h1 {
-  font-size: 36px;
-  margin-left: 10px;
+  align-items: center;
 }
 .home-button {
-  background-color: #121212;
-  color: #ffffff;
+  background-color: var(--primary-color);
+  color: var(--secondary-color);
   font-family: "Orbitron", sans-serif;
   border: none;
   cursor: pointer;
   font-size: 16px;
   margin: 24px;
   border-radius: 8px;
+  border: solid 1px var(--secondary-color);
 }
 .home-button:hover {
-  background-color: #27db0f;
+  background-color: var(--accent-color);
 }
 .rights-header-buttons {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
-
+.image-section {
+  max-width: 1500px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 20px;
+}
 .img-section img {
   width: 300px;
   height: 200px;
@@ -78,6 +107,9 @@ h1 {
   transform: scale(1.05);
   transition: transform 0.3s;
 }
+/* --------------------------------------------- */
+/*                 DIALOG / MODAL                */
+/* --------------------------------------------- */
 .dialog-picture {
   width: 650px;
   height: 400px;
@@ -91,7 +123,7 @@ dialog::backdrop {
   justify-content: space-between;
   font-size: 12px;
   margin-bottom: 10px;
-  background-color: #ffffff;
+  background-color: var(--background-color);
 }
 
 .close-button {
@@ -110,10 +142,10 @@ dialog::backdrop {
   justify-content: space-between;
   font-size: 12px;
   margin-top: 10px;
-  background-color: #ffffff;
+  background-color: var(--background-color);
 }
 .next-button {
-  background-color: #121212;
+  background-color: var(--primary-color);
   font-family: "Orbitron", sans-serif;
   height: 32px;
   color: white;
@@ -124,7 +156,7 @@ dialog::backdrop {
   border-radius: 4px;
 }
 .back-button {
-  background-color: #121212;
+  background-color: var(--primary-color);
   font-family: "Orbitron", sans-serif;
   height: 32px;
   color: white;
@@ -136,11 +168,57 @@ dialog::backdrop {
 }
 .dialog-footer p {
   margin: 0;
-  color: #000000;
+  color: var(--text-color);
 }
-
+/* --------------------------------------------- */
+/*                 UPLOAD                        */
+/* --------------------------------------------- */
+::file-selector-button {
+  background-color: var(--primary-color);
+  color: var(--background-color);
+  font-family: "Orbitron", sans-serif;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  margin: 24px 10px;
+  border-radius: 8px;
+  border: solid 1px #ffffff;
+}
+::file-selector-button:hover {
+  background-color: var(--accent-color);
+}
+#fileUpload {
+  width: 310px;
+}
+input#file-upload[type="file"] {
+  display: none;
+}
+.upload-remove-button {
+  background-color: var(--primary-color);
+  color: var(--secondary-color);
+  font-family: "Orbitron", sans-serif;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  margin: 24px 10px;
+  border-radius: 8px;
+  border: solid 1px #ffffff;
+}
+.upload-remove-button:hover {
+  background-color: var(--accent-color);
+}
+.upload-section {
+  max-width: 1500px;
+  padding-top: 16px;
+  padding-bottom: 48px;
+  display: flex;
+  align-items: center;
+}
+/* --------------------------------------------- */
+/*                    FOOTER                     */
+/* --------------------------------------------- */
 footer {
-  background-color: #121212;
+  background-color: var(--primary-color);
   border-top: 1px solid #e7e7e7;
   height: 12vh;
   color: white;
@@ -172,15 +250,15 @@ footer p {
   color: white;
   display: flex;
   flex-direction: column;
-  gap: 8px;
-  font-size: 12px;
+  gap: 4px;
+  font-size: 16px;
 }
 .footer-rights a {
   color: white;
   text-decoration: none;
 }
 .footer-rights a:hover {
-  font-size: 14px;
+  font-size: 18px;
 }
 .profil-img {
   object-fit: cover;
@@ -194,8 +272,9 @@ footer p {
 .link-pixa {
   margin-left: 10px;
 }
-
-
+/* --------------------------------------------- */
+/*                    DARK THEME                 */
+/* --------------------------------------------- */
 /** 
   * Beispiel für Verschachteltes CSS (mit dem Theme Button)
   * https://developer.mozilla.org/de/docs/Web/CSS/CSS_nesting/Nesting_at-rules
@@ -204,20 +283,96 @@ footer p {
   */
 body {
   #themeToggle {
-    background-color: #121212;
-    color: #ffffff;
+    background-color: var(--primary-color);
+    color: var(--secondary-color);
     font-family: "Orbitron", sans-serif;
     border: none;
     cursor: pointer;
     font-size: 16px;
     margin: 24px;
     border-radius: 8px;
+    height: 22px;
   }
 
   &.dark-mode {
     #themeToggle {
-      background-color: #27db0f;
-      color: #ffffff;
+      background-color: var(--accent-color);
+      color: var(--secondary-color);
+      border: solid 1px #ffffff;
     }
   }
-}  
+}
+body.dark-mode {
+  background-color: var(--primary-color);
+  color: var(--secondary-color);
+}
+/* --------------------------------------------- */
+/*                 MEDIA QUERIES                 */
+/* --------------------------------------------- */
+@media (max-width: 1000px) {
+  .img-section img {
+    width: 400px;
+    height: 250px;
+  }
+}
+@media (max-width: 880px) {
+  .img-section img {
+    width: 300px;
+    height: 200px;
+  }
+}
+@media (max-width: 710px) {
+  .img-section img {
+    width: 400px;
+    height: 250px;
+  }
+  .welcome-section {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+  .fotogram-logo {
+    width: 300px;
+  }
+  .upload-section {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .profil-img {
+    display: none;
+  }
+  h2 {
+    display: none;
+  }
+  .github-logo {
+    display: none;
+  }
+}
+@media (max-width: 440px) {
+  .created-by-container p {
+    display: none;
+  }
+  h1 {
+    font-size: 28px;
+  }
+  .fotogram-logo {
+    width: 250px;
+  }
+  .img-section img {
+    width: 300px;
+    height: 200px;
+  }
+  #fileUpload {
+    width: 250px;
+  }
+  .rights-header-buttons {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+@media (max-width: 370px) {
+  .img-section img {
+    width: 250px;
+    height: 150px;
+  }
+}
