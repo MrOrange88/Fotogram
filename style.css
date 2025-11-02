@@ -200,6 +200,10 @@ dialog::backdrop {
 ::file-selector-button:hover {
   background-color: var(--accent-color);
 }
+.file-upload {
+  font-size: 16px;
+  font-weight: bold;
+}
 #fileUpload {
   width: 310px;
 }
@@ -336,6 +340,13 @@ body.dark-mode {
     width: 300px;
     height: 200px;
   }
+  .upload-section {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .file-upload {
+    margin-left: 14px;
+  }
 }
 @media (max-width: 710px) {
   .img-section img {
@@ -354,6 +365,7 @@ body.dark-mode {
     flex-direction: column;
     align-items: flex-start;
   }
+
   .profil-img {
     display: none;
   }
