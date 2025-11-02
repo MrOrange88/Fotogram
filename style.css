@@ -5,7 +5,7 @@
   font-family: "Orbitron";
   src: url("./Orbitron/Orbitron-VariableFont_wght.ttf") format("woff2"),
     url("./Orbitron/Orbitron-VariableFont_wght.ttf") format("woff");
-  font-weight: normal;
+  font-weight: normal, bold;
   font-style: normal;
 }
 /* --------------------------------------------- */
@@ -74,8 +74,10 @@ header {
   font-family: "Orbitron", sans-serif;
   border: none;
   cursor: pointer;
-  font-size: 16px;
+  font-size: 18px;
+  height: 24px;
   margin: 24px;
+  font-weight: bold;
   border-radius: 8px;
   border: solid 1px var(--secondary-color);
 }
@@ -107,6 +109,10 @@ header {
   transform: scale(1.05);
   transition: transform 0.3s;
 }
+.link {
+  font-weight: bold;
+}
+
 /* --------------------------------------------- */
 /*                 DIALOG / MODAL                */
 /* --------------------------------------------- */
@@ -288,10 +294,11 @@ body {
     font-family: "Orbitron", sans-serif;
     border: none;
     cursor: pointer;
-    font-size: 16px;
+    font-size: 18px;
+    font-weight: bold;
     margin: 24px;
     border-radius: 8px;
-    height: 22px;
+    height: 24px;
   }
 
   &.dark-mode {
@@ -299,6 +306,8 @@ body {
       background-color: var(--accent-color);
       color: var(--secondary-color);
       border: solid 1px #ffffff;
+      font-weight: bold;
+      font-size: 18px;
     }
   }
 }
@@ -347,6 +356,13 @@ body.dark-mode {
   .github-logo {
     display: none;
   }
+  .dialog-picture {
+    width: 400px;
+    height: 250px;
+  }
+  .dialog-header {
+    display: flex;
+  }
 }
 @media (max-width: 440px) {
   .created-by-container p {
@@ -369,9 +385,17 @@ body.dark-mode {
     flex-direction: column;
     align-items: center;
   }
+  .dialog-picture {
+    width: 300px;
+    height: 200px;
+  }
 }
 @media (max-width: 370px) {
   .img-section img {
+    width: 250px;
+    height: 150px;
+  }
+  .dialog-picture {
     width: 250px;
     height: 150px;
   }
