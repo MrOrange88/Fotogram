@@ -349,21 +349,30 @@ body.dark-mode {
   }
 }
 @media (max-width: 710px) {
+  .img-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
   .img-section img {
     width: 400px;
     height: 250px;
   }
   .welcome-section {
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
     gap: 16px;
   }
   .fotogram-logo {
     width: 300px;
   }
+  .header-upload-container {
+    display: flex;
+    justify-content: center;
+  }
   .upload-section {
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
   }
 
   .profil-img {
